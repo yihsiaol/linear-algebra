@@ -1,3 +1,5 @@
+from math import sqrt
+
 class Point:
     def __init__(self, *coordinates):
         self.coordinates = coordinates
@@ -20,4 +22,10 @@ class Vector:
 
     def __mul__(self, other):
         return Vector(*map(lambda x: x * other, self.components))
+
+    def magnitude(self):
+        return sqrt(sum(map(lambda x: x**2, self.components)))
+
+    def normalize(self):
+        return self * (1 / self.magnitude())
 
