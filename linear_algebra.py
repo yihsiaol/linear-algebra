@@ -7,7 +7,17 @@ class Point:
 
 class Vector:
     def __init__(self, *components):
-        self.components= components
+        self.components = components
 
     def __str__(self):
         return 'Vector{}'.format(self.components)
+
+    def __add__(self, other):
+        return Vector(*map(sum, zip(self.components, other.components)))
+
+    def __sub__(self, other):
+        return Vector(*map(lambda x: x[0] - x[1], zip(self.components, other.components)))
+
+    def __mul__(self, other):
+        return Vector(*map(lambda x: x * other, self.components))
+
