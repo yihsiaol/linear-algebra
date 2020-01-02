@@ -1,4 +1,4 @@
-from math import acos, pi, sqrt
+from math import acos, nan, pi, sqrt
 
 class Point:
     def __init__(self, *coordinates):
@@ -37,15 +37,24 @@ class Vector:
 
     # normalize the vector instance to a unit vector to find its direction
     def normalize(self):
-        return self * (1 / self.magnitude())
+        if self.magnitude() == 0:
+            # normalized zero vector does not exist
+            return nan
+        else:
+            return self * (1 / self.magnitude())
 
     # find the angle between another vector in radians
     def angle_rad(self, other):
         inner_product = self * other
         magnitude_product = self.magnitude() * other.magnitude()
-        return acos(inner_product / magnitude_product)
+        if magnitude_product == 0:
+            # no angle between a zero vector
+            return nan
+        else:
+            return acos(inner_product / magnitude_product)
 
     # find the angle between another vector in radians
     def angle_deg(self, other):
         return self.angle_rad(other) * 180 / pi
+
 
