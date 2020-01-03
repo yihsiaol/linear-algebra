@@ -57,4 +57,12 @@ class Vector:
     def angle_deg(self, other):
         return self.angle_rad(other) * 180 / pi
 
+    # project the vector onto another vector
+    def project(self, other):
+        unit_other = other.normalize()
+        return unit_other * (self * unit_other)
+
+    # find the orthogonal component for the vector from another vector
+    def orth_comp(self, other):
+        return self - self.project(other)
 
